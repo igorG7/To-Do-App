@@ -13,22 +13,178 @@
 @CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
 
 // Light Theme
-@VeryLightGray: hsl(0, 0%, 98%);
-@VeryLightGrayishBlue: hsl(236, 33%, 92%);
-@LightGrayishBlue: hsl(233, 11%, 84%);
-@DarkGrayishBlue: hsl(236, 9%, 61%);
-@VeryDarkGrayishBlue: hsl(235, 19%, 35%);
+@Light_VeryLightGray: hsl(0, 0%, 98%);
+@Light_VeryLightGrayishBlue: hsl(236, 33%, 92%);
+@Light_LightGrayishBlue: hsl(233, 11%, 84%);
+@Light_DarkGrayishBlue: hsl(236, 9%, 61%);
+@Light_VeryDarkGrayishBlue: hsl(235, 19%, 35%);
 
 //Dark Theme
-@VeryDarkBlue: hsl(235, 21%, 11%);
-@VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
-@LightGrayishBlue: hsl(234, 39%, 85%);
-@LightGrayishBlue: hsl(236, 33%, 92%); // Hover
-@DarkGrayishBlue: hsl(234, 11%, 52%);
-@VeryDarkGrayishBlue: hsl(233, 14%, 35%);
-@VeryDarkGrayishBlue: hsl(237, 14%, 26%);
+@Dark_VeryDarkBlue: hsl(235, 21%, 11%);
+@Dark_VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
+@Dark_LightGrayishBlue: hsl(234, 39%, 85%);
+@Dark_LightGrayishBlueHover: hsl(236, 33%, 92%); // Hover
+@Dark_DarkGrayishBlue: hsl(234, 11%, 52%);
+@Dark_VeryDarkGrayishBlue: hsl(233, 14%, 35%);
+@Dark_VeryDarkGrayishBlueMedium: hsl(237, 14%, 26%);
 
+//  LAYOUT
+
+// Mobile
 body {
   font-family: "Josefin Sans";
   font-size: 18px;
+  background-color: @Dark_VeryDarkBlue;
+
+  img {
+    width: 100%;
+  }
+
+  main {
+    section {
+      margin: 0 auto;
+      width: 80%;
+      height: 500px;
+
+      .theme {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+        width: 100%;
+        height: 10%;
+        margin-bottom: 16px;
+
+        p {
+          font-size: 30px;
+          font-weight: 700;
+          color: #fff;
+        }
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .create-task {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        padding: 16px;
+        border-radius: 4px;
+        background-color: @Dark_VeryDarkDesaturatedBlue;
+
+        .circle {
+          width: 25px;
+          height: 25px;
+          margin-right: 16px;
+          background-color: transparent;
+          border: 2px solid @Dark_VeryDarkGrayishBlueMedium;
+          border-radius: 50%;
+        }
+
+        input {
+          font-family: "Josefin Sans";
+          width: 80%;
+
+          border: none;
+          background-color: transparent;
+          color: #fff;
+
+          &::placeholder {
+            color: @Dark_DarkGrayishBlue;
+          }
+        }
+      }
+
+      .task-list {
+        width: 100%;
+        height: 70%;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        background-color: @Dark_VeryDarkDesaturatedBlue;
+
+        .view-tasks {
+          height: 85%;
+
+          .task {
+            width: 100%;
+            height: 60px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 2px solid @Dark_VeryDarkGrayishBlueMedium;
+
+            input {
+              width: 25px;
+              height: 25px;
+              background-color: red;
+            }
+
+            label {
+              color: @Dark_LightGrayishBlue;
+              font-size: 14px;
+              font-weight: 400;
+            }
+
+            button {
+              background-color: transparent;
+              border: none;
+
+              img {
+                width: 15px;
+                height: 15px;
+              }
+            }
+          }
+        }
+
+        .clear {
+          height: 15%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px;
+
+          p {
+            color: @Dark_VeryDarkGrayishBlue;
+            font-size: 14px;
+          }
+
+          button {
+            background-color: transparent;
+            border: none;
+            color: @Dark_VeryDarkGrayishBlue;
+            font-size: 14px;
+            font-weight: 700;
+            font-family: "Josefin Sans";
+          }
+        }
+      }
+
+      .view-option {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 64px;
+        background-color: @Dark_VeryDarkDesaturatedBlue;
+        border-radius: 8px;
+
+        button {
+          background-color: transparent;
+          border: none;
+          font-size: 14px;
+          font-weight: 700;
+          color: @Dark_VeryDarkGrayishBlue;
+        }
+      }
+    }
+  }
 }

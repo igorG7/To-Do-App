@@ -3,10 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
     <title>To-Do App</title>
   </head>
   <body>
+    <!-- <picture>
+      <source
+        media="(max-width: 425px)"
+        srcset="imgs/bg-mobile-light.jpg"
+        type="image/jpg"
+      />
+      <source
+        media="(max-width: 1980px)"
+        srcset="imgs/bg-desktop-dark.jpg"
+        type="image/jpg"
+      />
+      <img src="imgs/bg-desktop-dark.jpg" class="background" />
+    </picture> -->
+    <main>
+      <section>
+        <div class="theme">
+          <p>T O D O</p>
+          <img src="imgs/icon-sun.svg" alt="" />
+        </div>
+
+        <div class="create-task">
+          <div class="circle"></div>
+          <input type="text" placeholder="Create a new todo..." />
+        </div>
+
+        <div class="task-list">
+          <div class="view-tasks">
+            <div class="task">
+              <input type="checkbox" name="todo-check" />
+              <label for="todo-check">Lorem ipsum dolor sit amet</label>
+              <button><img src="imgs/icon-cross.svg" /></button>
+            </div>
+          </div>
+
+          <div class="clear">
+            <p>5 items left</p>
+            <button>Clear Completed</button>
+          </div>
+        </div>
+
+        <div class="view-option">
+          <button>All</button>
+          <button>Active</button>
+          <button>Completed</button>
+        </div>
+      </section>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
   </body>
 </html>
