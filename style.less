@@ -1,16 +1,10 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Rubik:wght@300;400;500&display=swap");
 
 // COLORS
 
 // Primary
 @BrightBlue: hsl(220, 98%, 61%);
-@CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+@CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 
 // Light Theme
 @Light_VeryLightGray: hsl(0, 0%, 98%);
@@ -28,51 +22,117 @@
 @Dark_VeryDarkGrayishBlue: hsl(233, 14%, 35%);
 @Dark_VeryDarkGrayishBlueMedium: hsl(237, 14%, 26%);
 
+// MIXINS
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.max-height-sections {
+  max-height: 45px;
+}
+
+// STATE
+
+.check-active {
+  background: @CheckBackground;
+}
+
+.img-active {
+  visibility: visible;
+}
+
+.img-disabled {
+  visibility: hidden;
+}
+
+.task-completed {
+  color: @Dark_VeryDarkGrayishBlueMedium;
+  text-decoration: line-through;
+}
+
 //  LAYOUT
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 // Mobile
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
   font-family: "Josefin Sans";
   font-size: 18px;
-  background-color: @Dark_VeryDarkBlue;
+  background: @Dark_VeryDarkBlue;
 
-  img {
+  .img-background {
     width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1000;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  header {
+    width: 80%;
+    height: 10%;
+    .flex-center();
+
+    .theme {
+      width: 100%;
+      height: 100%;
+      .flex-between();
+      .max-height-sections();
+      background-color: transparent;
+
+      p {
+        font-size: 30px;
+        font-weight: 700;
+        color: #fff;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
   }
 
   main {
+    width: 80%;
+    height: 70%;
+
     section {
-      margin: 0 auto;
-      width: 80%;
-      height: 500px;
-
-      .theme {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: transparent;
-        width: 100%;
-        height: 10%;
-        margin-bottom: 16px;
-
-        p {
-          font-size: 30px;
-          font-weight: 700;
-          color: #fff;
-        }
-
-        img {
-          width: 24px;
-          height: 24px;
-        }
-      }
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
 
       .create-task {
+        .max-height-sections();
         width: 100%;
         height: 10%;
         display: flex;
         align-items: center;
-        margin-bottom: 16px;
+
         padding: 16px;
         border-radius: 4px;
         background-color: @Dark_VeryDarkDesaturatedBlue;
@@ -94,6 +154,12 @@ body {
           background-color: transparent;
           color: #fff;
 
+          &:focus {
+            border: 0 none;
+            box-shadow: 0 0 0;
+            outline: 0;
+          }
+
           &::placeholder {
             color: @Dark_DarkGrayishBlue;
           }
@@ -102,34 +168,47 @@ body {
 
       .task-list {
         width: 100%;
-        height: 70%;
-        border-radius: 8px;
-        margin-bottom: 16px;
+        height: 60%;
+        max-height: 380px;
+        border-radius: 4px;
+
         background-color: @Dark_VeryDarkDesaturatedBlue;
 
         .view-tasks {
           height: 85%;
 
           .task {
+            .flex-between();
             width: 100%;
-            height: 60px;
+            height: 55px;
             padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
             border-bottom: 2px solid @Dark_VeryDarkGrayishBlueMedium;
 
-            input {
-              width: 25px;
-              height: 25px;
-              background-color: red;
-            }
+            .task-content {
+              display: flex;
+              align-items: center;
+              margin-right: 4px;
 
-            label {
-              color: @Dark_LightGrayishBlue;
-              font-size: 14px;
-              font-weight: 400;
+              .check-button {
+                .flex-center();
+                height: 25px;
+                width: 25px;
+                margin-right: 8px;
+                border-radius: 50%;
+                background-color: transparent;
+                border: 2px solid @Dark_VeryDarkGrayishBlueMedium;
+
+                .check-img {
+                  width: 12px;
+                  height: 12px;
+                }
+              }
+
+              p {
+                color: @Dark_LightGrayishBlue;
+                font-size: 14px;
+                font-weight: 400;
+              }
             }
 
             button {
@@ -145,10 +224,8 @@ body {
         }
 
         .clear {
+          .flex-between();
           height: 15%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
           padding: 16px;
 
           p {
@@ -168,22 +245,44 @@ body {
       }
 
       .view-option {
+        .flex-center();
+        .max-height-sections();
         width: 100%;
         height: 10%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 64px;
-        background-color: @Dark_VeryDarkDesaturatedBlue;
-        border-radius: 8px;
 
-        button {
-          background-color: transparent;
-          border: none;
-          font-size: 14px;
-          font-weight: 700;
-          color: @Dark_VeryDarkGrayishBlue;
+        background-color: @Dark_VeryDarkDesaturatedBlue;
+        border-radius: 4px;
+
+        .group {
+          .flex-between();
+          width: 60%;
+
+          button {
+            background-color: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            color: @Dark_VeryDarkGrayishBlue;
+          }
         }
+      }
+    }
+  }
+
+  footer {
+    width: 80%;
+    height: 10%;
+    .flex-center();
+
+    .description {
+      .max-height-sections();
+      .flex-center();
+      width: 100%;
+      height: 100%;
+
+      p {
+        color: @Dark_VeryDarkGrayishBlue;
+        font-size: 14px;
       }
     }
   }

@@ -7,26 +7,31 @@
     <title>To-Do App</title>
   </head>
   <body>
-    <!-- <picture>
-      <source
-        media="(max-width: 425px)"
-        srcset="imgs/bg-mobile-light.jpg"
-        type="image/jpg"
-      />
-      <source
-        media="(max-width: 1980px)"
-        srcset="imgs/bg-desktop-dark.jpg"
-        type="image/jpg"
-      />
-      <img src="imgs/bg-desktop-dark.jpg" class="background" />
-    </picture> -->
+    <section class="img-background">
+      <picture>
+        <source
+          media="(max-width: 425px)"
+          srcset="imgs/bg-mobile-light.jpg"
+          type="image/jpg"
+        />
+        <source
+          media="(max-width: 1980px)"
+          srcset="imgs/bg-desktop-dark.jpg"
+          type="image/jpg"
+        />
+        <img src="imgs/bg-desktop-dark.jpg" class="background" />
+      </picture>
+    </section>
+
+    <header>
+      <div class="theme">
+        <p>T O D O</p>
+        <img src="imgs/icon-sun.svg" alt="" />
+      </div>
+    </header>
+
     <main>
       <section>
-        <div class="theme">
-          <p>T O D O</p>
-          <img src="imgs/icon-sun.svg" alt="" />
-        </div>
-
         <div class="create-task">
           <div class="circle"></div>
           <input type="text" placeholder="Create a new todo..." />
@@ -35,9 +40,22 @@
         <div class="task-list">
           <div class="view-tasks">
             <div class="task">
-              <input type="checkbox" name="todo-check" />
-              <label for="todo-check">Lorem ipsum dolor sit amet</label>
-              <button><img src="imgs/icon-cross.svg" /></button>
+              <div class="task-content">
+                <button class="check-button" name="todo-check">
+                  <img
+                    src="imgs/icon-check.svg"
+                    class="check-img img-disabled"
+                  />
+                </button>
+
+                <p for="todo-check" class="task-completed">
+                  Lorem ipsum dolor sit amet
+                </p>
+              </div>
+
+              <button>
+                <img src="imgs/icon-cross.svg" />
+              </button>
             </div>
           </div>
 
@@ -48,12 +66,20 @@
         </div>
 
         <div class="view-option">
-          <button>All</button>
-          <button>Active</button>
-          <button>Completed</button>
+          <div class="group">
+            <button>All</button>
+            <button>Active</button>
+            <button>Completed</button>
+          </div>
         </div>
       </section>
     </main>
+
+    <footer>
+      <div class="description">
+        <p>Drag and drop reorder list</p>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
   </body>
 </html>
