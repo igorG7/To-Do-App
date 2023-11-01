@@ -37,7 +37,7 @@
 }
 
 .max-height-sections {
-  max-height: 45px;
+  max-height: 50px;
 }
 
 // STATE
@@ -53,12 +53,6 @@
 .img-disabled {
   visibility: hidden;
 }
-
-.task-completed {
-  color: @Dark_VeryDarkGrayishBlueMedium;
-  text-decoration: line-through;
-}
-
 //  LAYOUT
 
 * {
@@ -88,19 +82,20 @@ body {
 
     img {
       width: 100%;
+      max-height: 200px;
     }
   }
 
   header {
     width: 80%;
-    height: 10%;
+    height: 15%;
     .flex-center();
+    .max-height-sections();
 
     .theme {
       width: 100%;
       height: 100%;
       .flex-between();
-      .max-height-sections();
       background-color: transparent;
 
       p {
@@ -119,12 +114,14 @@ body {
   main {
     width: 80%;
     height: 70%;
+    max-height: 500px;
+    margin: 16px 0;
 
     section {
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
 
       .create-task {
         .max-height-sections();
@@ -148,11 +145,12 @@ body {
 
         input {
           font-family: "Josefin Sans";
+          font-weight: 400;
           width: 80%;
-
           border: none;
           background-color: transparent;
           color: #fff;
+          caret-color: @BrightBlue;
 
           &:focus {
             border: 0 none;
@@ -168,10 +166,9 @@ body {
 
       .task-list {
         width: 100%;
-        height: 60%;
+        height: 70%;
         max-height: 380px;
         border-radius: 4px;
-
         background-color: @Dark_VeryDarkDesaturatedBlue;
 
         .view-tasks {
@@ -194,13 +191,14 @@ body {
                 height: 25px;
                 width: 25px;
                 margin-right: 8px;
+                cursor: pointer;
                 border-radius: 50%;
                 background-color: transparent;
                 border: 2px solid @Dark_VeryDarkGrayishBlueMedium;
 
                 .check-img {
-                  width: 12px;
-                  height: 12px;
+                  width: 11px;
+                  height: 11px;
                 }
               }
 
@@ -208,12 +206,19 @@ body {
                 color: @Dark_LightGrayishBlue;
                 font-size: 14px;
                 font-weight: 400;
+                cursor: pointer;
+
+                &.task-completed {
+                  color: @Dark_VeryDarkGrayishBlueMedium;
+                  text-decoration: line-through;
+                }
               }
             }
 
             button {
               background-color: transparent;
               border: none;
+              cursor: pointer;
 
               img {
                 width: 15px;
@@ -240,6 +245,11 @@ body {
             font-size: 14px;
             font-weight: 700;
             font-family: "Josefin Sans";
+            cursor: pointer;
+
+            &:hover {
+              color: @Dark_LightGrayishBlueHover;
+            }
           }
         }
       }
@@ -257,12 +267,21 @@ body {
           .flex-between();
           width: 60%;
 
-          button {
+          .view-button {
+            color: @Dark_VeryDarkGrayishBlue;
             background-color: transparent;
             border: none;
             font-size: 14px;
             font-weight: 700;
-            color: @Dark_VeryDarkGrayishBlue;
+            cursor: pointer;
+
+            &.view-active {
+              color: @BrightBlue;
+            }
+
+            &:hover {
+              color: @Dark_LightGrayishBlueHover;
+            }
           }
         }
       }
@@ -271,11 +290,11 @@ body {
 
   footer {
     width: 80%;
-    height: 10%;
+    height: 15%;
     .flex-center();
+    .max-height-sections();
 
     .description {
-      .max-height-sections();
       .flex-center();
       width: 100%;
       height: 100%;
