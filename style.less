@@ -40,6 +40,10 @@
   max-height: 50px;
 }
 
+.max-height-sections-desktop {
+  max-height: 100px;
+}
+
 // STATE
 
 .check-active {
@@ -107,6 +111,7 @@ body {
       img {
         width: 24px;
         height: 24px;
+        cursor: pointer;
       }
     }
   }
@@ -129,7 +134,6 @@ body {
         height: 10%;
         display: flex;
         align-items: center;
-
         padding: 16px;
         border-radius: 4px;
         background-color: @Dark_VeryDarkDesaturatedBlue;
@@ -184,17 +188,20 @@ body {
             .task-content {
               display: flex;
               align-items: center;
-              margin-right: 4px;
 
               .check-button {
                 .flex-center();
                 height: 25px;
                 width: 25px;
-                margin-right: 8px;
+                margin-right: 16px;
                 cursor: pointer;
                 border-radius: 50%;
                 background-color: transparent;
                 border: 2px solid @Dark_VeryDarkGrayishBlueMedium;
+
+                &:hover {
+                  border: 2px solid @BrightBlue;
+                }
 
                 .check-img {
                   width: 11px;
@@ -202,27 +209,28 @@ body {
                 }
               }
 
-              p {
+              .task-text {
                 color: @Dark_LightGrayishBlue;
                 font-size: 14px;
                 font-weight: 400;
                 cursor: pointer;
 
                 &.task-completed {
-                  color: @Dark_VeryDarkGrayishBlueMedium;
+                  color: @Dark_VeryDarkGrayishBlue;
                   text-decoration: line-through;
                 }
               }
             }
 
-            button {
+            .x-button {
+              .flex-center();
               background-color: transparent;
               border: none;
               cursor: pointer;
 
               img {
-                width: 15px;
-                height: 15px;
+                width: 14px;
+                height: 14px;
               }
             }
           }
@@ -233,22 +241,30 @@ body {
           height: 15%;
           padding: 16px;
 
-          p {
-            color: @Dark_VeryDarkGrayishBlue;
-            font-size: 14px;
+          .items-left {
+            p {
+              color: @Dark_VeryDarkGrayishBlue;
+              font-size: 14px;
+            }
           }
 
-          button {
-            background-color: transparent;
-            border: none;
-            color: @Dark_VeryDarkGrayishBlue;
-            font-size: 14px;
-            font-weight: 700;
-            font-family: "Josefin Sans";
-            cursor: pointer;
+          .view-option-desktop {
+            display: none;
+          }
 
-            &:hover {
-              color: @Dark_LightGrayishBlueHover;
+          .clear-button {
+            button {
+              background-color: transparent;
+              border: none;
+              color: @Dark_VeryDarkGrayishBlue;
+              font-size: 14px;
+              font-weight: 700;
+              font-family: "Josefin Sans";
+              cursor: pointer;
+
+              &:hover {
+                color: @Dark_LightGrayishBlueHover;
+              }
             }
           }
         }
@@ -259,7 +275,6 @@ body {
         .max-height-sections();
         width: 100%;
         height: 10%;
-
         background-color: @Dark_VeryDarkDesaturatedBlue;
         border-radius: 4px;
 
@@ -271,6 +286,7 @@ body {
             color: @Dark_VeryDarkGrayishBlue;
             background-color: transparent;
             border: none;
+            font-family: "Josefin Sans";
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
@@ -303,6 +319,102 @@ body {
         color: @Dark_VeryDarkGrayishBlue;
         font-size: 14px;
       }
+    }
+  }
+}
+
+// Desktop
+
+@media (min-width: 1024px) {
+  body {
+    .img-background {
+      img {
+        max-height: 300px;
+      }
+    }
+
+    header {
+      width: 35%;
+      height: 15%;
+    }
+
+    main {
+      width: 35%;
+      height: 70%;
+
+      section {
+        justify-content: space-around;
+
+        .create-task {
+          height: 15%;
+          .max-height-sections-desktop();
+
+          input {
+            font-size: 16px;
+            height: 100%;
+          }
+        }
+
+        .task-list {
+          height: 75%;
+          .view-tasks {
+            .task {
+              .task-content {
+                .task-text {
+                  font-size: 16px;
+                }
+              }
+            }
+          }
+
+          .clear {
+            .items-left {
+              width: fit-content;
+            }
+
+            .view-option-desktop {
+              .flex-center();
+              width: fit-content;
+
+              .group-desktop {
+                .flex-between();
+                width: 100%;
+
+                .view-button-desktop {
+                  color: @Dark_VeryDarkGrayishBlue;
+                  background-color: transparent;
+                  border: none;
+                  font-family: "Josefin Sans";
+                  font-size: 14px;
+                  font-weight: 700;
+                  cursor: pointer;
+
+                  &:nth-child(2) {
+                    margin: 0 16px;
+                  }
+
+                  &.view-active {
+                    color: @BrightBlue;
+                  }
+
+                  &:hover {
+                    color: @Dark_LightGrayishBlueHover;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .view-option {
+          display: none;
+        }
+      }
+    }
+
+    footer {
+      width: 35%;
+      height: 15%;
     }
   }
 }

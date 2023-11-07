@@ -41,24 +41,56 @@
           <div class="view-tasks">
             <div class="task">
               <div class="task-content">
-                <button class="check-button" name="todo-check ">
+                <button class="check-button check-active" name="todo-check ">
                   <img src="imgs/icon-check.svg" class="check-img img-active" />
                 </button>
 
-                <p for="todo-check" class="task-completed">
+                <p for="todo-check" class="task-text task-completed">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
 
-              <button>
+              <button class="x-button">
+                <img src="imgs/icon-cross.svg" />
+              </button>
+            </div>
+
+            <div class="task">
+              <div class="task-content">
+                <button class="check-button" name="todo-check ">
+                  <img
+                    src="imgs/icon-check.svg"
+                    class="check-img img-disabled"
+                  />
+                </button>
+
+                <p for="todo-check" class="task-text">
+                  Lorem ipsum dolor sit amet
+                </p>
+              </div>
+
+              <button class="x-button">
                 <img src="imgs/icon-cross.svg" />
               </button>
             </div>
           </div>
 
           <div class="clear">
-            <p>5 items left</p>
-            <button>Clear Completed</button>
+            <div class="items-left">
+              <p>5 items left</p>
+            </div>
+
+            <div class="view-option-desktop">
+              <div class="group-desktop">
+                <button class="view-button-desktop view-active">All</button>
+                <button class="view-button-desktop">Active</button>
+                <button class="view-button-desktop">Completed</button>
+              </div>
+            </div>
+
+            <div class="clear-button">
+              <button>Clear Completed</button>
+            </div>
           </div>
         </div>
 
