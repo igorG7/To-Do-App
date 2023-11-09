@@ -3,10 +3,112 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
     <title>To-Do App</title>
   </head>
   <body>
+    <section class="img-background">
+      <picture>
+        <source
+          media="(max-width: 425px)"
+          srcset="imgs/bg-mobile-light.jpg"
+          type="image/jpg"
+        />
+        <source
+          media="(max-width: 1980px)"
+          srcset="imgs/bg-desktop-dark.jpg"
+          type="image/jpg"
+        />
+        <img src="imgs/bg-desktop-dark.jpg" class="background" />
+      </picture>
+    </section>
+
+    <header>
+      <div class="theme">
+        <p>T O D O</p>
+        <img src="imgs/icon-sun.svg" alt="" />
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="create-task">
+          <div class="circle"></div>
+          <input type="text" placeholder="Create a new todo..." />
+        </div>
+
+        <div class="task-list">
+          <div class="view-tasks">
+            <div class="task">
+              <div class="task-content">
+                <button class="check-button check-active" name="todo-check ">
+                  <img src="imgs/icon-check.svg" class="check-img img-active" />
+                </button>
+
+                <p for="todo-check" class="task-text task-completed">
+                  Lorem ipsum dolor sit amet
+                </p>
+              </div>
+
+              <button class="x-button">
+                <img src="imgs/icon-cross.svg" />
+              </button>
+            </div>
+
+            <div class="task">
+              <div class="task-content">
+                <button class="check-button" name="todo-check ">
+                  <img
+                    src="imgs/icon-check.svg"
+                    class="check-img img-disabled"
+                  />
+                </button>
+
+                <p for="todo-check" class="task-text">
+                  Lorem ipsum dolor sit amet
+                </p>
+              </div>
+
+              <button class="x-button">
+                <img src="imgs/icon-cross.svg" />
+              </button>
+            </div>
+          </div>
+
+          <div class="clear">
+            <div class="items-left">
+              <p>5 items left</p>
+            </div>
+
+            <div class="view-option-desktop">
+              <div class="group-desktop">
+                <button class="view-button-desktop view-active">All</button>
+                <button class="view-button-desktop">Active</button>
+                <button class="view-button-desktop">Completed</button>
+              </div>
+            </div>
+
+            <div class="clear-button">
+              <button>Clear Completed</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-option">
+          <div class="group">
+            <button class="view-button view-active">All</button>
+            <button class="view-button">Active</button>
+            <button class="view-button">Completed</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="description">
+        <p>Drag and drop reorder list</p>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
   </body>
 </html>
