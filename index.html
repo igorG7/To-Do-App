@@ -6,7 +6,7 @@
     <link rel="stylesheet/less" type="text/css" href="style.less" />
     <title>To-Do App</title>
   </head>
-  <body>
+  <body class="light">
     <section class="img-background">
       <picture>
         <source
@@ -16,7 +16,7 @@
         />
         <source
           media="(max-width: 1980px)"
-          srcset="imgs/bg-desktop-dark.jpg"
+          srcset="imgs/bg-desktop-light.jpg"
           type="image/jpg"
         />
         <img src="imgs/bg-desktop-dark.jpg" class="background" />
@@ -26,26 +26,30 @@
     <header>
       <div class="theme">
         <p>T O D O</p>
-        <img src="imgs/icon-sun.svg" alt="" />
+
+        <img src="imgs/icon-moon.svg" alt="" />
       </div>
     </header>
 
     <main>
       <section>
-        <div class="create-task">
-          <div class="circle"></div>
-          <input type="text" placeholder="Create a new todo..." />
+        <div id="create-task" class="create-task light">
+          <div class="circle light"></div>
+          <input type="text" class="light" placeholder="Create a new todo..." />
         </div>
 
-        <div class="task-list">
+        <div class="task-list light">
           <div class="view-tasks">
-            <div class="task">
+            <div class="task light">
               <div class="task-content">
-                <button class="check-button check-active" name="todo-check ">
+                <button
+                  class="check-button check-active light"
+                  name="todo-check "
+                >
                   <img src="imgs/icon-check.svg" class="check-img img-active" />
                 </button>
 
-                <p for="todo-check" class="task-text task-completed">
+                <p for="todo-check" class="task-text light task-completed">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
@@ -57,14 +61,14 @@
 
             <div class="task">
               <div class="task-content">
-                <button class="check-button" name="todo-check ">
+                <button class="check-button light" name="todo-check ">
                   <img
                     src="imgs/icon-check.svg"
                     class="check-img img-disabled"
                   />
                 </button>
 
-                <p for="todo-check" class="task-text">
+                <p for="todo-check" class="task-text light">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
@@ -77,28 +81,30 @@
 
           <div class="clear">
             <div class="items-left">
-              <p>5 items left</p>
+              <p class="light">5 items left</p>
             </div>
 
             <div class="view-option-desktop">
               <div class="group-desktop">
-                <button class="view-button-desktop view-active">All</button>
-                <button class="view-button-desktop">Active</button>
-                <button class="view-button-desktop">Completed</button>
+                <button class="view-button-desktop light view-active">
+                  All
+                </button>
+                <button class="view-button-desktop light">Active</button>
+                <button class="view-button-desktop light">Completed</button>
               </div>
             </div>
 
             <div class="clear-button">
-              <button>Clear Completed</button>
+              <button class="light">Clear Completed</button>
             </div>
           </div>
         </div>
 
-        <div class="view-option">
+        <div class="view-option light">
           <div class="group">
-            <button class="view-button view-active">All</button>
-            <button class="view-button">Active</button>
-            <button class="view-button">Completed</button>
+            <button class="view-button light view-active">All</button>
+            <button class="view-button light">Active</button>
+            <button class="view-button light">Completed</button>
           </div>
         </div>
       </section>
@@ -106,9 +112,10 @@
 
     <footer>
       <div class="description">
-        <p>Drag and drop reorder list</p>
+        <p class="light">Drag and drop reorder list</p>
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <script src="main.js"></script>
   </body>
 </html>
