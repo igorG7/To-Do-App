@@ -6,12 +6,12 @@
     <link rel="stylesheet/less" type="text/css" href="style.less" />
     <title>To-Do App</title>
   </head>
-  <body>
+  <body class="dark" id="body-theme">
     <section class="img-background">
-      <picture>
+      <picture id="pic-dark" class="picture-dark">
         <source
           media="(max-width: 425px)"
-          srcset="imgs/bg-mobile-light.jpg"
+          srcset="imgs/bg-mobile-dark.jpg"
           type="image/jpg"
         />
         <source
@@ -21,31 +21,67 @@
         />
         <img src="imgs/bg-desktop-dark.jpg" class="background" />
       </picture>
+
+      <picture id="pic-light" class="picture-light picture-disabled">
+        <source
+          media="(max-width: 425px)"
+          srcset="imgs/bg-mobile-light.jpg"
+          type="image/jpg"
+        />
+        <source
+          media="(max-width: 1980px)"
+          srcset="imgs/bg-desktop-light.jpg"
+          type="image/jpg"
+        />
+        <img src="imgs/bg-desktop-light.jpg" class="background" />
+      </picture>
     </section>
 
     <header>
       <div class="theme">
         <p>T O D O</p>
-        <img src="imgs/icon-sun.svg" alt="" />
+
+        <button id="theme-button">
+          <img
+            src="imgs/icon-moon.svg"
+            alt="Imagem Tema"
+            class=""
+            id="dark-theme"
+          />
+          <img
+            src="imgs/icon-sun.svg"
+            id="light-theme"
+            alt="Imagem Tema"
+            class="theme-disabled"
+          />
+        </button>
       </div>
     </header>
 
     <main>
       <section>
-        <div class="create-task">
-          <div class="circle"></div>
-          <input type="text" placeholder="Create a new todo..." />
+        <div id="create-task" class="create-task dark">
+          <div id="circle" class="circle dark"></div>
+          <input
+            type="text"
+            id="input-create"
+            class="light"
+            placeholder="Create a new todo..."
+          />
         </div>
 
-        <div class="task-list">
+        <div id="task-list" class="task-list dark">
           <div class="view-tasks">
-            <div class="task">
+            <div class="task dark">
               <div class="task-content">
-                <button class="check-button check-active" name="todo-check ">
+                <button
+                  class="check-button check-active dark"
+                  name="todo-check "
+                >
                   <img src="imgs/icon-check.svg" class="check-img img-active" />
                 </button>
 
-                <p for="todo-check" class="task-text task-completed">
+                <p for="todo-check" class="task-text task-completed dark">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
@@ -55,16 +91,13 @@
               </button>
             </div>
 
-            <div class="task">
+            <div class="task dark">
               <div class="task-content">
-                <button class="check-button" name="todo-check ">
-                  <img
-                    src="imgs/icon-check.svg"
-                    class="check-img img-disabled"
-                  />
+                <button class="check-button dark" name="todo-check ">
+                  <img src="imgs/icon-check.svg" class="check-img" />
                 </button>
 
-                <p for="todo-check" class="task-text">
+                <p for="todo-check" class="task-text dark">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
@@ -77,28 +110,30 @@
 
           <div class="clear">
             <div class="items-left">
-              <p>5 items left</p>
+              <p id="items-left" class="dark">5 items left</p>
             </div>
 
             <div class="view-option-desktop">
               <div class="group-desktop">
-                <button class="view-button-desktop view-active">All</button>
-                <button class="view-button-desktop">Active</button>
-                <button class="view-button-desktop">Completed</button>
+                <button class="view-button-desktop dark view-active">
+                  All
+                </button>
+                <button class="view-button-desktop dark">Active</button>
+                <button class="view-button-desktop dark">Completed</button>
               </div>
             </div>
 
             <div class="clear-button">
-              <button>Clear Completed</button>
+              <button id="clear-button" class="dark">Clear Completed</button>
             </div>
           </div>
         </div>
 
-        <div class="view-option">
+        <div id="view-option" class="view-option dark">
           <div class="group">
-            <button class="view-button view-active">All</button>
-            <button class="view-button">Active</button>
-            <button class="view-button">Completed</button>
+            <button class="view-button dark view-active">All</button>
+            <button class="view-button dark">Active</button>
+            <button class="view-button dark">Completed</button>
           </div>
         </div>
       </section>
@@ -106,9 +141,10 @@
 
     <footer>
       <div class="description">
-        <p>Drag and drop reorder list</p>
+        <p id="description" class="dark">Drag and drop reorder list</p>
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/less"></script>
+    <script src="main.js" type="module"></script>
   </body>
 </html>
