@@ -30,12 +30,12 @@ input_create.addEventListener("keypress", (e) => {
 let allTasks = [
   {
     taskText: "Fazer almoço",
-    status: "ativo",
+    status: "active",
   },
 
   {
     taskText: "Arrumar cama",
-    status: "ativo",
+    status: "active",
   },
 ];
 
@@ -46,29 +46,46 @@ tasks.map((item, index) => {
   console.log(divTaskContent, buttonX);
 
   divTaskContent.addEventListener("click", () => {
-    console.log("completou a tarefa " + index);
-
     let taskButtonCheck = divTaskContent.children[0];
     let taskParagraph = divTaskContent.children[1];
-
     let taskImgCheck = taskButtonCheck.children[0];
+    let paragraphConverted = taskParagraph.textContent.toString();
 
-    console.log(taskButtonCheck, taskParagraph);
+    console.log(paragraphConverted);
 
     if (taskButtonCheck.classList.contains("check-active")) {
       console.log("Tarefa ativa novamente");
       taskButtonCheck.classList.remove("check-active");
       taskImgCheck.classList.remove("img-active");
       taskParagraph.classList.remove("task-completed");
+      controlTasks(paragraphConverted);
     } else {
       console.log("Tarefa completa");
       taskButtonCheck.classList.add("check-active");
       taskImgCheck.classList.add("img-active");
       taskParagraph.classList.add("task-completed");
+      controlTasks(paragraphConverted);
     }
   });
 
   buttonX.addEventListener("click", () => {
     console.log("deletou a tarefa " + index);
+    allTasks.splice(index, 1);
+    console.log(allTasks);
   });
 });
+
+const controlTasks = (contentText) => {
+  let searchTask = contentText;
+  let foundTask = allTasks.find((item) => item.taskText === searchTask);
+
+  console.log(foundTask);
+
+  if (foundTask && foundTask.status === "active") {
+    foundTask.status = "completed";
+  } else {
+    foundTask.status = "active";
+  }
+
+  console.log(allTasks);
+};
