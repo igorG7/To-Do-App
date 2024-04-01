@@ -270,9 +270,11 @@ body {
 
           .task {
             .flex-between();
+            align-items: center;
             .trasition-border();
             width: 100%;
             height: 55px;
+
             padding: 16px;
 
             &.dark {
@@ -310,14 +312,10 @@ body {
                   border: 2px solid @BrightBlue;
                 }
 
-                .check-img {
-                  width: 11px;
-                  height: 11px;
-                  visibility: hidden;
-
-                  &.img-active {
-                    visibility: visible;
-                  }
+                &.check-active {
+                  background-image: url("imgs/icon-check.svg"), @CheckBackground;
+                  background-repeat: no-repeat;
+                  background-position: center;
                 }
               }
 
