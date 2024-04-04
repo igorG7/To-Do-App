@@ -52,6 +52,9 @@ const controlStateTask = (event) => {
   const buttonElement = divParent.querySelector("button")
   const pElement = divParent.querySelector("p")
 
+  const preventErrorClick = event.target.classList.contains("task")
+  if (preventErrorClick) return
+
   if (!containsCheckButton && !contaisPCompleted) {
     console.log("Tarefa Completa")
     buttonElement.classList.add("check-active")
