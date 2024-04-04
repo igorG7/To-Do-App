@@ -12,53 +12,24 @@ const text_task = Array.from(document.querySelectorAll(".task-text"));
 
 theme_button.addEventListener("click", themeChange);
 
-// let task = ulViewTasks.querySelector("li").cloneNode(true)
-
 let valueTask;
-
-const liDefault = `
-                <li class="task">
-                  <div class="task-content">
-                    <button class="check-button">
-                      <img src="imgs/icon-check.svg" class="check-img class="delete"" />
-                    </button>
-
-                    <p class="task-text task-completed"></p>
-                  </div>
-
-                  <button class="x-button">
-                    <img src="imgs/icon-cross.svg" />
-                  </button>
-                </li>
-`
 
 input_create.addEventListener("input", (e) => {
   valueTask = e.target.value;
   console.log(valueTask);
 });
 
-const taskExists = ulViewTasks.querySelector("li")
+const createTask = () => {
+  const newTask = ulViewTasks.querySelector("li").cloneNode(true)
+  newTask.removeAttribute("style")
+  newTask.querySelector("p").textContent = valueTask
+  ulViewTasks.appendChild(newTask)
+}
 
 input_create.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-
-    let task;
-
-    if(!taskExists){
-      console.log("Não tem Li")
-      liDefault.textContent = valueTask
-      ulViewTasks.appendChild(liDefault)
-    } else {
-      console.log("Li existe")
-      task = ulViewTasks.querySelector("li").cloneNode(true)
-      task.querySelector("p").textContent = valueTask
-      ulViewTasks.appendChild(task)
-    }
-   //console.log(ulViewTasks.querySelector("li"))
-    // let task = ulViewTasks.querySelector("li").cloneNode(true)
-    // task.querySelector("p").textContent = valueTask
-
-    
+    createTask()
+    input_create.value = ""
   }
 });
 
