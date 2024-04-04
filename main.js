@@ -20,7 +20,7 @@ const liDefault = `
                 <li class="task">
                   <div class="task-content">
                     <button class="check-button">
-                      <img src="imgs/icon-check.svg" class="check-img" />
+                      <img src="imgs/icon-check.svg" class="check-img class="delete"" />
                     </button>
 
                     <p class="task-text task-completed"></p>
@@ -54,10 +54,6 @@ input_create.addEventListener("keypress", (e) => {
       task.querySelector("p").textContent = valueTask
       ulViewTasks.appendChild(task)
     }
-
-
-
-
    //console.log(ulViewTasks.querySelector("li"))
     // let task = ulViewTasks.querySelector("li").cloneNode(true)
     // task.querySelector("p").textContent = valueTask
@@ -67,9 +63,9 @@ input_create.addEventListener("keypress", (e) => {
 });
 
 ulViewTasks.addEventListener("click", (event) => {
-   //console.log(event.target.parentElement)
-   controlStateTask(event)
-   removeTask(event)
+   console.log(event.target)
+   const isDeleteAction = event.target.classList.contains("delete")
+   isDeleteAction ? removeTask(event) : controlStateTask(event);
 })
 
 const removeTask = (event) => {
