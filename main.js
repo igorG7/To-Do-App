@@ -46,6 +46,7 @@ const controlStateTask = (event) => {
   const contaisPCompleted =  event.target.classList.contains("task-completed")
   
   const divParent = event.target.parentElement
+  const stateLi = divParent.parentElement
   const buttonElement = divParent.querySelector("button")
   const pElement = divParent.querySelector("p")
 
@@ -53,12 +54,16 @@ const controlStateTask = (event) => {
   if (preventErrorClick) return
 
   if (!containsCheckButton && !contaisPCompleted) {
-    console.log("Tarefa Completa")
+    console.log("Tarefa Completa", stateLi)
+    stateLi.classList.add("completed")
+    stateLi.classList.remove("active")
     buttonElement.classList.add("check-active")
     pElement.classList.add("task-completed")
   
   } else { 
-    console.log("Tarefa Ativa")
+    console.log("Tarefa Ativa", stateLi)
+    stateLi.classList.remove("completed")
+    stateLi.classList.add("active")
     buttonElement.classList.remove("check-active")
     pElement.classList.remove("task-completed")
 
@@ -66,7 +71,6 @@ const controlStateTask = (event) => {
 }
 
 const optionViewButton = Array.from(document.querySelectorAll(".option"))
-console.log(optionViewButton)
 
 let itemAttribute;
 let itemActive;
