@@ -61,6 +61,28 @@ const controlStateTask = (event) => {
     console.log("Tarefa Ativa")
     buttonElement.classList.remove("check-active")
     pElement.classList.remove("task-completed")
-    
+
   }
 }
+
+const optionViewButton = Array.from(document.querySelectorAll(".option"))
+console.log(optionViewButton)
+
+let itemAttribute;
+let itemActive;
+
+optionViewButton.map((item) => {
+  item.addEventListener("click" , (event) => {
+    itemAttribute = event.target.getAttribute("data-option")
+
+    optionViewButton.map((item) => {
+      itemActive = item.getAttribute("data-option")
+      const equalItems = itemAttribute === itemActive
+      if(equalItems) {
+        item.classList.add("view-active")
+      } else {
+        item.classList.remove("view-active")
+      }
+    })
+  })
+})

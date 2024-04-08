@@ -65,7 +65,7 @@
           <input
             type="text"
             id="input-create"
-            class="light"
+            class="dark"
             placeholder="Create a new todo..."
           />
         </div>
@@ -112,11 +112,24 @@
 
             <div class="view-option-desktop">
               <div class="group-desktop">
-                <button class="view-button-desktop dark view-active">
+                <button
+                  class="view-button-desktop option dark view-active"
+                  data-option="all"
+                >
                   All
                 </button>
-                <button class="view-button-desktop dark">Active</button>
-                <button class="view-button-desktop dark">Completed</button>
+                <button
+                  class="view-button-desktop option dark"
+                  data-option="active"
+                >
+                  Active
+                </button>
+                <button
+                  class="view-button-desktop option dark"
+                  data-option="completed"
+                >
+                  Completed
+                </button>
               </div>
             </div>
 
@@ -128,9 +141,18 @@
 
         <div id="view-option" class="view-option dark">
           <div class="group">
-            <button class="view-button dark view-active">All</button>
-            <button class="view-button dark">Active</button>
-            <button class="view-button dark">Completed</button>
+            <button
+              class="view-button option dark view-active"
+              data-option="all"
+            >
+              All
+            </button>
+            <button class="view-button option dark" data-option="active">
+              Active
+            </button>
+            <button class="view-button option dark" data-option="completed">
+              Completed
+            </button>
           </div>
         </div>
       </section>
