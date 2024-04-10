@@ -4,6 +4,8 @@ const theme_button = document.querySelector("#theme-button");
 const input_create = document.querySelector("#input-create");
 const ulViewTasks = document.querySelector(".view-tasks")
 
+const updatedUlViewTasks = document.querySelector(".view-tasks li:last-child")
+let tasks = Array.from(ulViewTasks.querySelectorAll("li"))
 theme_button.addEventListener("click", themeChange);
 
 let valueTask;
@@ -18,6 +20,7 @@ const createTask = () => {
   newTask.removeAttribute("style")
   newTask.querySelector("p").textContent = valueTask
   ulViewTasks.appendChild(newTask)
+
 }
 
 input_create.addEventListener("keypress", (e) => {
@@ -88,5 +91,34 @@ optionViewButton.map((item) => {
         item.classList.remove("view-active")
       }
     })
+
+    renderOptionViewSelected(itemAttribute)
   })
 })
+
+const renderOptionViewSelected = (option) => {
+  option === "all" 
+  ? renderAllTasks(option) 
+  : renderActiveOrCompleted(option)
+}
+
+const renderActiveOrCompleted = (valueOption) => {
+  tasks.map((item) => {
+    console.log(item)
+    if(item.classList.contains(valueOption)) {
+      console.log("Entrei aqui")
+      item.classList.remove("hidden")
+      item.classList.add("visible")
+    } else {
+      item.classList.add("hidden")
+      item.classList.remove("visible")
+    }
+})
+}
+
+const renderAllTasks = (valueOption) => {
+  tasks.map((item) =>{
+    item.classList.remove("hidden")
+    item.classList.add("visible")
+  })
+}
