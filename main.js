@@ -3,9 +3,8 @@ import { themeChange } from "./util/theme.js";
 const theme_button = document.querySelector("#theme-button");
 const input_create = document.querySelector("#input-create");
 const ulViewTasks = document.querySelector(".view-tasks")
+let tasks 
 
-const updatedUlViewTasks = document.querySelector(".view-tasks li:last-child")
-let tasks = Array.from(ulViewTasks.querySelectorAll("li"))
 theme_button.addEventListener("click", themeChange);
 
 let valueTask;
@@ -20,7 +19,7 @@ const createTask = () => {
   newTask.removeAttribute("style")
   newTask.querySelector("p").textContent = valueTask
   ulViewTasks.appendChild(newTask)
-
+  tasks = Array.from(ulViewTasks.querySelectorAll("li"))
 }
 
 input_create.addEventListener("keypress", (e) => {

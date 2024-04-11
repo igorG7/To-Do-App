@@ -3,9 +3,6 @@ const create_task = document.querySelector("#create-task");
 const circle = document.querySelector("#circle");
 const input_create = document.querySelector("#input-create");
 const task_list = document.querySelector("#task-list");
-const task = Array.from(document.querySelectorAll(".task"));
-const check_button = Array.from(document.querySelectorAll(".check-button"));
-const task_text = Array.from(document.querySelectorAll(".task-text"));
 const items_left = document.querySelector("#items-left");
 const btn_view_desk = Array.from(
   document.querySelectorAll(".view-button-desktop")
@@ -16,7 +13,6 @@ const btn_view_mobile = Array.from(document.querySelectorAll(".view-button"));
 const description = document.querySelector("#description");
 const pic_dark = document.querySelector("#pic-dark");
 const pic_light = document.querySelector("#pic-light");
-
 const dark = document.querySelector("#dark-theme");
 const light = document.querySelector("#light-theme");
 
@@ -53,16 +49,19 @@ const darkTheme = () => {
   task_list.classList.remove("light");
   task_list.classList.add("dark");
 
+  const task = Array.from(document.querySelectorAll(".task"));
   task.map((item) => {
     item.classList.remove("light");
     item.classList.add("dark");
   });
 
+  const check_button = Array.from(document.querySelectorAll(".check-button"));
   check_button.map((item) => {
     item.classList.remove("light");
     item.classList.add("dark");
   });
 
+  const task_text = Array.from(document.querySelectorAll(".task-text"));
   task_text.map((item) => {
     item.classList.remove("light");
     item.classList.add("dark");
@@ -116,16 +115,19 @@ const lightTheme = () => {
   task_list.classList.remove("dark");
   task_list.classList.add("light");
 
+  const task = Array.from(document.querySelectorAll(".task"));
   task.map((item) => {
     item.classList.remove("dark");
     item.classList.add("light");
   });
 
+  const check_button = Array.from(document.querySelectorAll(".check-button"));
   check_button.map((item) => {
     item.classList.remove("dark");
     item.classList.add("light");
   });
 
+  const task_text = Array.from(document.querySelectorAll(".task-text"));
   task_text.map((item) => {
     item.classList.remove("dark");
     item.classList.add("light");
