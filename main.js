@@ -39,13 +39,13 @@ const controlStateTask = (event) => {
   const containsCheckButton = event.target.classList.contains("check-active")
   const contaisPCompleted =  event.target.classList.contains("task-completed")
   
-  console.log(event.target)
-  
   const divParent = event.target.parentElement
   const stateLi = divParent.parentElement
   const buttonElement = divParent.querySelector("button")
   const pElement = divParent.querySelector("p")
-  const preventErrorClick = event.target.classList.contains("task")
+  const preventErrorClick = event.target.classList.contains("task") 
+  || event.target.classList.contains("view-tasks")
+
   if (preventErrorClick) return
 
   if (!containsCheckButton && !contaisPCompleted) {
