@@ -71,42 +71,39 @@
         </div>
 
         <div id="task-list" class="task-list dark">
-          <div class="view-tasks">
-            <div class="task dark">
+          <ul class="view-tasks">
+            <li class="task dark active visible" style="display: none">
               <div class="task-content">
-                <button
-                  class="check-button check-active dark"
-                  name="todo-check "
-                >
-                  <img src="imgs/icon-check.svg" class="check-img img-active" />
-                </button>
+                <button class="check-button dark"></button>
 
-                <p for="todo-check" class="task-text task-completed dark">
+                <p class="task-text dark"></p>
+              </div>
+
+              <button class="x-button delete"></button>
+            </li>
+
+            <li class="task dark completed visible">
+              <div class="task-content">
+                <button class="check-button check-active dark"></button>
+
+                <p class="task-text task-completed dark">
                   Lorem ipsum dolor sit amet
                 </p>
               </div>
 
-              <button class="x-button">
-                <img src="imgs/icon-cross.svg" />
-              </button>
-            </div>
+              <button class="x-button delete"></button>
+            </li>
 
-            <div class="task dark">
+            <li class="task dark active visible">
               <div class="task-content">
-                <button class="check-button dark" name="todo-check ">
-                  <img src="imgs/icon-check.svg" class="check-img" />
-                </button>
+                <button class="check-button dark"></button>
 
-                <p for="todo-check" class="task-text dark">
-                  Lorem ipsum dolor sit amet
-                </p>
+                <p class="task-text dark">Arrumar cama</p>
               </div>
 
-              <button class="x-button">
-                <img src="imgs/icon-cross.svg" />
-              </button>
-            </div>
-          </div>
+              <button class="x-button delete"></button>
+            </li>
+          </ul>
 
           <div class="clear">
             <div class="items-left">
@@ -115,11 +112,24 @@
 
             <div class="view-option-desktop">
               <div class="group-desktop">
-                <button class="view-button-desktop dark view-active">
+                <button
+                  class="view-button-desktop option dark view-active"
+                  data-option="all"
+                >
                   All
                 </button>
-                <button class="view-button-desktop dark">Active</button>
-                <button class="view-button-desktop dark">Completed</button>
+                <button
+                  class="view-button-desktop option dark"
+                  data-option="active"
+                >
+                  Active
+                </button>
+                <button
+                  class="view-button-desktop option dark"
+                  data-option="completed"
+                >
+                  Completed
+                </button>
               </div>
             </div>
 
@@ -131,9 +141,18 @@
 
         <div id="view-option" class="view-option dark">
           <div class="group">
-            <button class="view-button dark view-active">All</button>
-            <button class="view-button dark">Active</button>
-            <button class="view-button dark">Completed</button>
+            <button
+              class="view-button option dark view-active"
+              data-option="all"
+            >
+              All
+            </button>
+            <button class="view-button option dark" data-option="active">
+              Active
+            </button>
+            <button class="view-button option dark" data-option="completed">
+              Completed
+            </button>
           </div>
         </div>
       </section>
