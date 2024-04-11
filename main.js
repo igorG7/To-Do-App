@@ -108,3 +108,16 @@ const renderAllTasks = () => {
     item.classList.add("visible")
   })
 }
+
+const clearButton = document.querySelector("#clear-button")
+
+const removeAllCompletedTasks = () => {
+  tasks.map((item) => {
+    const isCompleted = item.classList.contains("completed")
+    if (isCompleted) {
+      item.remove()
+    }
+  })
+}
+
+clearButton.addEventListener("click", removeAllCompletedTasks)
