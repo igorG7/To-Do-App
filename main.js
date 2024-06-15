@@ -15,13 +15,14 @@ console.log(tasks);
 // console.log(storageTask)
 
 class Task {
-  constructor() {
+  constructor(content) {
     const activeTheme = this.theme();
 
     this.liElement = this.createLi(activeTheme);
     this.divElement = this.createDiv();
     this.buttonCheckElement = this.createButton("check-button", activeTheme);
     this.paragraphElement = this.createTextTask(activeTheme);
+    this.paragraphElement.textContent = content;
     this.buttonDeleteElement = this.createButton("x-button", "delete");
 
     this.divElement.appendChild(this.buttonCheckElement);
@@ -29,6 +30,8 @@ class Task {
 
     this.liElement.appendChild(this.divElement);
     this.liElement.appendChild(this.buttonDeleteElement);
+
+    this.controlTasks();
 
     return this.liElement;
   }
@@ -42,6 +45,7 @@ class Task {
     const li = document.createElement("li");
     li.classList.add("task");
     li.classList.add("visible");
+    li.classList.add("active");
     li.classList.add(themeClass);
 
     return li;
@@ -67,10 +71,27 @@ class Task {
 
     return button;
   }
+
+  controlTasks() {
+    this.divElement.addEventListener("click", () => {
+      if (this.liElement.classList.contains("active")) {
+        this.liElement.classList.add("completed");
+        this.buttonCheckElement.classList.add("check-active");
+        this.paragraphElement.classList.add("task-completed");
+        this.liElement.classList.remove("active");
+      } else {
+        this.liElement.classList.add("active");
+        this.buttonCheckElement.classList.remove("check-active");
+        this.paragraphElement.classList.remove("task-completed");
+        this.liElement.classList.remove("completed");
+      }
+    });
+  }
 }
 
-let teste = new Task();
+let teste = new Task("teste");
 console.log(teste);
+ulViewTasks.appendChild(teste);
 
 const createTask = () => {
   const newTask = ulViewTasks.querySelector("li").cloneNode(true);
@@ -100,32 +121,32 @@ const removeTask = (event) => {
   }
 };
 
-const controlStateTask = (event) => {
-  const containsCheckButton = event.target.classList.contains("check-active");
-  const contaisPCompleted = event.target.classList.contains("task-completed");
+// const controlStateTask = (event) => {
+//   const containsCheckButton = event.target.classList.contains("check-active");
+//   const contaisPCompleted = event.target.classList.contains("task-completed");
 
-  const divParent = event.target.parentElement;
-  const stateLi = divParent.parentElement;
-  const buttonElement = divParent.querySelector("button");
-  const pElement = divParent.querySelector("p");
-  const preventErrorClick =
-    event.target.classList.contains("task") ||
-    event.target.classList.contains("view-tasks");
+//   const divParent = event.target.parentElement;
+//   const stateLi = divParent.parentElement;
+//   const buttonElement = divParent.querySelector("button");
+//   const pElement = divParent.querySelector("p");
+//   const preventErrorClick =
+//     event.target.classList.contains("task") ||
+//     event.target.classList.contains("view-tasks");
 
-  if (preventErrorClick) return;
+//   if (preventErrorClick) return;
 
-  if (!containsCheckButton && !contaisPCompleted) {
-    stateLi.classList.add("completed");
-    stateLi.classList.remove("active");
-    buttonElement.classList.add("check-active");
-    pElement.classList.add("task-completed");
-  } else {
-    stateLi.classList.remove("completed");
-    stateLi.classList.add("active");
-    buttonElement.classList.remove("check-active");
-    pElement.classList.remove("task-completed");
-  }
-};
+//   if (!containsCheckButton && !contaisPCompleted) {
+//     stateLi.classList.add("completed");
+//     stateLi.classList.remove("active");
+//     buttonElement.classList.add("check-active");
+//     pElement.classList.add("task-completed");
+//   } else {
+//     stateLi.classList.remove("completed");
+//     stateLi.classList.add("active");
+//     buttonElement.classList.remove("check-active");
+//     pElement.classList.remove("task-completed");
+//   }
+// };
 
 const optionViewButton = Array.from(document.querySelectorAll(".option"));
 
