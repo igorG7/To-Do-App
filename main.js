@@ -32,6 +32,7 @@ class Task {
     this.liElement.appendChild(this.buttonDeleteElement);
 
     this.controlTasks();
+    this.deleteTask();
 
     return this.liElement;
   }
@@ -87,39 +88,42 @@ class Task {
       }
     });
   }
+
+  deleteTask() {
+    this.buttonDeleteElement.addEventListener("click", (event) => {
+      event.target.parentElement.remove();
+    });
+  }
 }
 
 let teste = new Task("teste");
 console.log(teste);
 ulViewTasks.appendChild(teste);
 
-const createTask = () => {
-  const newTask = ulViewTasks.querySelector("li").cloneNode(true);
-  let valueTask = input_create.value;
-  newTask.removeAttribute("style");
-  newTask.querySelector("p").textContent = valueTask;
+const createTask = (content) => {
+  const newTask = new Task(content);
   ulViewTasks.appendChild(newTask);
   tasks = Array.from(ulViewTasks.querySelectorAll("li"));
 };
 
 input_create.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    createTask();
+    createTask(input_create.value);
     input_create.value = "";
   }
 });
 
-ulViewTasks.addEventListener("click", (event) => {
-  const isDeleteAction = event.target.classList.contains("delete");
-  isDeleteAction ? removeTask(event) : controlStateTask(event);
-});
+// ulViewTasks.addEventListener("click", (event) => {
+//   const isDeleteAction = event.target.classList.contains("delete");
+//   isDeleteAction ? removeTask(event) : controlStateTask(event);
+// });
 
-const removeTask = (event) => {
-  const containsDelete = event.target.classList.contains("delete");
-  if (containsDelete) {
-    event.target.parentElement.remove();
-  }
-};
+// const removeTask = (event) => {
+//   const containsDelete = event.target.classList.contains("delete");
+//   if (containsDelete) {
+//     event.target.parentElement.remove();
+//   }
+// };
 
 // const controlStateTask = (event) => {
 //   const containsCheckButton = event.target.classList.contains("check-active");
