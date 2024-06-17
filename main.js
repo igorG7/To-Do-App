@@ -8,11 +8,8 @@ let tasks = Array.from(ulViewTasks.querySelectorAll("li"));
 const bodyTheme = document.querySelector("body");
 
 theme_button.addEventListener("click", themeChange);
-console.log(tasks);
 
-// localStorage.setItem("task", JSON.stringify(ulViewTasks))
-// const storageTask = JSON.parse(localStorage.getItem("task"))
-// console.log(storageTask)
+let storedTasks = [];
 
 class Task {
   constructor(content) {
@@ -33,8 +30,6 @@ class Task {
 
     this.controlTasks();
     this.deleteTask();
-
-    return this.liElement;
   }
 
   theme() {
@@ -46,7 +41,6 @@ class Task {
     const li = document.createElement("li");
     li.classList.add("task");
     li.classList.add("visible");
-    li.classList.add("active");
     li.classList.add(themeClass);
 
     return li;
@@ -80,11 +74,13 @@ class Task {
         this.buttonCheckElement.classList.add("check-active");
         this.paragraphElement.classList.add("task-completed");
         this.liElement.classList.remove("active");
+        this.storeChanges(this.paragraphElement.textContent);
       } else {
         this.liElement.classList.add("active");
         this.buttonCheckElement.classList.remove("check-active");
         this.paragraphElement.classList.remove("task-completed");
         this.liElement.classList.remove("completed");
+        this.storeChanges(this.paragraphElement.textContent);
       }
     });
   }
@@ -92,17 +88,45 @@ class Task {
   deleteTask() {
     this.buttonDeleteElement.addEventListener("click", (event) => {
       event.target.parentElement.remove();
+      let taskTextContent = this.paragraphElement.textContent;
+      let foundTask = storedTasks.filter(
+        (item) => item.text != taskTextContent
+      );
+      storedTasks = foundTask;
+      localStorage.setItem("taskElement", JSON.stringify(storedTasks));
     });
+  }
+
+  defineStatus(status) {
+    this.liElement.classList.add(status);
+  }
+
+  storeTasks(content) {
+    storedTasks.push({
+      text: content,
+      status: "active",
+    });
+
+    localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+  }
+
+  storeChanges(content) {
+    let foundTask = storedTasks.find((item) => item.text === content);
+    if (foundTask.status === "active") {
+      foundTask.status = "completed";
+    } else {
+      foundTask.status = "active";
+    }
+
+    localStorage.setItem("taskElement", JSON.stringify(storedTasks));
   }
 }
 
-let teste = new Task("teste");
-console.log(teste);
-ulViewTasks.appendChild(teste);
-
 const createTask = (content) => {
   const newTask = new Task(content);
-  ulViewTasks.appendChild(newTask);
+  newTask.defineStatus("active");
+  newTask.storeTasks(content);
+  ulViewTasks.appendChild(newTask.liElement);
   tasks = Array.from(ulViewTasks.querySelectorAll("li"));
 };
 
@@ -112,45 +136,6 @@ input_create.addEventListener("keypress", (e) => {
     input_create.value = "";
   }
 });
-
-// ulViewTasks.addEventListener("click", (event) => {
-//   const isDeleteAction = event.target.classList.contains("delete");
-//   isDeleteAction ? removeTask(event) : controlStateTask(event);
-// });
-
-// const removeTask = (event) => {
-//   const containsDelete = event.target.classList.contains("delete");
-//   if (containsDelete) {
-//     event.target.parentElement.remove();
-//   }
-// };
-
-// const controlStateTask = (event) => {
-//   const containsCheckButton = event.target.classList.contains("check-active");
-//   const contaisPCompleted = event.target.classList.contains("task-completed");
-
-//   const divParent = event.target.parentElement;
-//   const stateLi = divParent.parentElement;
-//   const buttonElement = divParent.querySelector("button");
-//   const pElement = divParent.querySelector("p");
-//   const preventErrorClick =
-//     event.target.classList.contains("task") ||
-//     event.target.classList.contains("view-tasks");
-
-//   if (preventErrorClick) return;
-
-//   if (!containsCheckButton && !contaisPCompleted) {
-//     stateLi.classList.add("completed");
-//     stateLi.classList.remove("active");
-//     buttonElement.classList.add("check-active");
-//     pElement.classList.add("task-completed");
-//   } else {
-//     stateLi.classList.remove("completed");
-//     stateLi.classList.add("active");
-//     buttonElement.classList.remove("check-active");
-//     pElement.classList.remove("task-completed");
-//   }
-// };
 
 const optionViewButton = Array.from(document.querySelectorAll(".option"));
 
@@ -207,6 +192,13 @@ const removeAllCompletedTasks = () => {
       item.remove();
     }
   });
+
+  let foundAllCompletedTasks = storedTasks.filter(
+    (item) => item.status != "completed"
+  );
+  console.log(foundAllCompletedTasks);
+  storedTasks = foundAllCompletedTasks;
+  localStorage.setItem("taskElement", JSON.stringify(storedTasks));
 };
 
 clearButton.addEventListener("click", removeAllCompletedTasks);
