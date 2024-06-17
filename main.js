@@ -9,7 +9,7 @@ const bodyTheme = document.querySelector("body");
 
 theme_button.addEventListener("click", themeChange);
 
-let storedTasks = [];
+let storedTasks = JSON.parse(localStorage.getItem("taskElement")) || [];
 
 class Task {
   constructor(content) {
@@ -209,7 +209,7 @@ const removeAllCompletedTasks = () => {
 clearButton.addEventListener("click", removeAllCompletedTasks);
 
 let loadedTasks = JSON.parse(localStorage.getItem("taskElement"));
-storedTasks = loadedTasks;
+storedTasks = loadedTasks || [];
 console.log(storedTasks);
 
 storedTasks.forEach((item) => {
