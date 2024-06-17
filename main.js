@@ -99,6 +99,11 @@ class Task {
 
   defineStatus(status) {
     this.liElement.classList.add(status);
+    let verifyStatus = this.liElement.classList.contains("active");
+    if (!verifyStatus) {
+      this.buttonCheckElement.classList.add("check-active");
+      this.paragraphElement.classList.add("task-completed");
+    }
   }
 
   storeTasks(content) {
@@ -202,3 +207,15 @@ const removeAllCompletedTasks = () => {
 };
 
 clearButton.addEventListener("click", removeAllCompletedTasks);
+
+let loadedTasks = JSON.parse(localStorage.getItem("taskElement"));
+storedTasks = loadedTasks;
+console.log(storedTasks);
+
+storedTasks.forEach((item) => {
+  let retrievedTask = new Task(item.text);
+  retrievedTask.defineStatus(item.status);
+  ulViewTasks.appendChild(retrievedTask.liElement);
+});
+
+tasks = Array.from(ulViewTasks.querySelectorAll("li"));
