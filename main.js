@@ -2,122 +2,220 @@ import { themeChange } from "./util/theme.js";
 
 const theme_button = document.querySelector("#theme-button");
 const input_create = document.querySelector("#input-create");
-const ulViewTasks = document.querySelector(".view-tasks")
-let tasks = Array.from(ulViewTasks.querySelectorAll("li"))
+const ulViewTasks = document.querySelector(".view-tasks");
+let tasks = Array.from(ulViewTasks.querySelectorAll("li"));
+
+const bodyTheme = document.querySelector("body");
 
 theme_button.addEventListener("click", themeChange);
 
-const createTask = () => {
-  const newTask = ulViewTasks.querySelector("li").cloneNode(true)
-  let valueTask = input_create.value
-  newTask.removeAttribute("style")
-  newTask.querySelector("p").textContent = valueTask
-  ulViewTasks.appendChild(newTask)
-  tasks = Array.from(ulViewTasks.querySelectorAll("li"))
+let storedTasks = [];
+
+class Task {
+  constructor(content) {
+    const activeTheme = this.theme();
+
+    this.liElement = this.createLi(activeTheme);
+    this.divElement = this.createDiv();
+    this.buttonCheckElement = this.createButton("check-button", activeTheme);
+    this.paragraphElement = this.createTextTask(activeTheme);
+    this.paragraphElement.textContent = content;
+    this.buttonDeleteElement = this.createButton("x-button", "delete");
+
+    this.divElement.appendChild(this.buttonCheckElement);
+    this.divElement.appendChild(this.paragraphElement);
+
+    this.liElement.appendChild(this.divElement);
+    this.liElement.appendChild(this.buttonDeleteElement);
+
+    this.controlTasks();
+    this.deleteTask();
+  }
+
+  theme() {
+    const verifyTheme = bodyTheme.classList.contains("dark") ? "dark" : "light";
+    return verifyTheme;
+  }
+
+  createLi(themeClass) {
+    const li = document.createElement("li");
+    li.classList.add("task");
+    li.classList.add("visible");
+    li.classList.add(themeClass);
+
+    return li;
+  }
+
+  createDiv() {
+    const div = document.createElement("div");
+    div.classList.add("task-content");
+    return div;
+  }
+
+  createTextTask(themeClass) {
+    const p = document.createElement("p");
+    p.classList.add("task-text");
+    p.classList.add(themeClass);
+    return p;
+  }
+
+  createButton(firstClass, secondClass) {
+    const button = document.createElement("button");
+    button.classList.add(firstClass);
+    button.classList.add(secondClass);
+
+    return button;
+  }
+
+  controlTasks() {
+    this.divElement.addEventListener("click", () => {
+      if (this.liElement.classList.contains("active")) {
+        this.liElement.classList.add("completed");
+        this.buttonCheckElement.classList.add("check-active");
+        this.paragraphElement.classList.add("task-completed");
+        this.liElement.classList.remove("active");
+        this.storeChanges(this.paragraphElement.textContent);
+      } else {
+        this.liElement.classList.add("active");
+        this.buttonCheckElement.classList.remove("check-active");
+        this.paragraphElement.classList.remove("task-completed");
+        this.liElement.classList.remove("completed");
+        this.storeChanges(this.paragraphElement.textContent);
+      }
+    });
+  }
+
+  deleteTask() {
+    this.buttonDeleteElement.addEventListener("click", (event) => {
+      event.target.parentElement.remove();
+      let taskTextContent = this.paragraphElement.textContent;
+      let foundTask = storedTasks.filter(
+        (item) => item.text != taskTextContent
+      );
+      storedTasks = foundTask;
+      localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+    });
+  }
+
+  defineStatus(status) {
+    this.liElement.classList.add(status);
+    let verifyStatus = this.liElement.classList.contains("active");
+    if (!verifyStatus) {
+      this.buttonCheckElement.classList.add("check-active");
+      this.paragraphElement.classList.add("task-completed");
+    }
+  }
+
+  storeTasks(content) {
+    storedTasks.push({
+      text: content,
+      status: "active",
+    });
+
+    localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+  }
+
+  storeChanges(content) {
+    let foundTask = storedTasks.find((item) => item.text === content);
+    if (foundTask.status === "active") {
+      foundTask.status = "completed";
+    } else {
+      foundTask.status = "active";
+    }
+
+    localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+  }
 }
+
+const createTask = (content) => {
+  const newTask = new Task(content);
+  newTask.defineStatus("active");
+  newTask.storeTasks(content);
+  ulViewTasks.appendChild(newTask.liElement);
+  tasks = Array.from(ulViewTasks.querySelectorAll("li"));
+};
 
 input_create.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    createTask()
-    input_create.value = ""
+    createTask(input_create.value);
+    input_create.value = "";
   }
 });
 
-ulViewTasks.addEventListener("click", (event) => {
-   const isDeleteAction = event.target.classList.contains("delete")
-   isDeleteAction ? removeTask(event) : controlStateTask(event);
-})
-
-const removeTask = (event) => {
-  const containsDelete = event.target.classList.contains("delete")
-  if(containsDelete) {
-    event.target.parentElement.remove()
-  }
-}
-
-const controlStateTask = (event) => {
-  const containsCheckButton = event.target.classList.contains("check-active")
-  const contaisPCompleted =  event.target.classList.contains("task-completed")
-  
-  const divParent = event.target.parentElement
-  const stateLi = divParent.parentElement
-  const buttonElement = divParent.querySelector("button")
-  const pElement = divParent.querySelector("p")
-  const preventErrorClick = event.target.classList.contains("task") 
-  || event.target.classList.contains("view-tasks")
-
-  if (preventErrorClick) return
-
-  if (!containsCheckButton && !contaisPCompleted) {
-    stateLi.classList.add("completed")
-    stateLi.classList.remove("active")
-    buttonElement.classList.add("check-active")
-    pElement.classList.add("task-completed")
-  } else { 
-    stateLi.classList.remove("completed")
-    stateLi.classList.add("active")
-    buttonElement.classList.remove("check-active")
-    pElement.classList.remove("task-completed")
-  }
-}
-
-const optionViewButton = Array.from(document.querySelectorAll(".option"))
+const optionViewButton = Array.from(document.querySelectorAll(".option"));
 
 let itemAttribute;
 let itemActive;
 
 optionViewButton.map((item) => {
-  item.addEventListener("click" , (event) => {
-    itemAttribute = event.target.getAttribute("data-option")
+  item.addEventListener("click", (event) => {
+    itemAttribute = event.target.getAttribute("data-option");
 
     optionViewButton.map((item) => {
-      itemActive = item.getAttribute("data-option")
-      const equalItems = itemAttribute === itemActive
-      if(equalItems) {
-        item.classList.add("view-active")
+      itemActive = item.getAttribute("data-option");
+      const equalItems = itemAttribute === itemActive;
+      if (equalItems) {
+        item.classList.add("view-active");
       } else {
-        item.classList.remove("view-active")
+        item.classList.remove("view-active");
       }
-    })
+    });
 
-    renderOptionViewSelected(itemAttribute)
-  })
-})
+    renderOptionViewSelected(itemAttribute);
+  });
+});
 
 const renderOptionViewSelected = (option) => {
-  option === "all" 
-  ? renderAllTasks() 
-  : renderActiveOrCompleted(option)
-}
+  option === "all" ? renderAllTasks() : renderActiveOrCompleted(option);
+};
 
 const renderActiveOrCompleted = (valueOption) => {
   tasks.map((item) => {
-    if(item.classList.contains(valueOption)) {
-      item.classList.remove("hidden")
-      item.classList.add("visible")
+    if (item.classList.contains(valueOption)) {
+      item.classList.remove("hidden");
+      item.classList.add("visible");
     } else {
-      item.classList.add("hidden")
-      item.classList.remove("visible")
+      item.classList.add("hidden");
+      item.classList.remove("visible");
     }
-})
-}
+  });
+};
 
 const renderAllTasks = () => {
-  tasks.map((item) =>{
-    item.classList.remove("hidden")
-    item.classList.add("visible")
-  })
-}
+  tasks.map((item) => {
+    item.classList.remove("hidden");
+    item.classList.add("visible");
+  });
+};
 
-const clearButton = document.querySelector("#clear-button")
+const clearButton = document.querySelector("#clear-button");
 
 const removeAllCompletedTasks = () => {
   tasks.map((item) => {
-    const isCompleted = item.classList.contains("completed")
+    const isCompleted = item.classList.contains("completed");
     if (isCompleted) {
-      item.remove()
+      item.remove();
     }
-  })
-}
+  });
 
-clearButton.addEventListener("click", removeAllCompletedTasks)
+  let foundAllCompletedTasks = storedTasks.filter(
+    (item) => item.status != "completed"
+  );
+  console.log(foundAllCompletedTasks);
+  storedTasks = foundAllCompletedTasks;
+  localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+};
+
+clearButton.addEventListener("click", removeAllCompletedTasks);
+
+let loadedTasks = JSON.parse(localStorage.getItem("taskElement"));
+storedTasks = loadedTasks;
+console.log(storedTasks);
+
+storedTasks.forEach((item) => {
+  let retrievedTask = new Task(item.text);
+  retrievedTask.defineStatus(item.status);
+  ulViewTasks.appendChild(retrievedTask.liElement);
+});
+
+tasks = Array.from(ulViewTasks.querySelectorAll("li"));
