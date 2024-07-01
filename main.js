@@ -238,7 +238,8 @@ function startSortableList(e) {
   e.preventDefault();
 
   let nextSibling = siblings.find((item) => {
-    return e.clientY <= item.offsetTop + item.offsetHeight / 2;
+    const rect = item.getBoundingClientRect();
+    return e.clientY <= rect.top + window.scrollY + rect.height / 2;
   });
 
   ulViewTasks.insertBefore(draggingItem, nextSibling);
