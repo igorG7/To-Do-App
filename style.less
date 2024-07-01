@@ -71,6 +71,10 @@
   background: @CheckBackground;
 }
 
+.dragging {
+  opacity: 0.3;
+}
+
 //  LAYOUT
 
 * {
@@ -276,6 +280,7 @@ body {
             width: 100%;
             height: 55px;
             padding: 16px;
+            cursor: grab;
 
             &.visible {
               display: flex;
