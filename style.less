@@ -273,6 +273,19 @@ body {
           height: 85%;
           overflow: auto;
 
+          &::-webkit-scrollbar {
+            background: transparent;
+            width: 3px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #8a8a8a;
+            border-radius: 16px;
+          }
+
+          &::-webkit-scrollbar-thumb:hover {
+            background: #a8a5a5;
+          }
+
           .task {
             .flex-between();
             align-items: center;
@@ -307,7 +320,9 @@ body {
                 .flex-center();
                 .trasition-border();
                 height: 25px;
+                min-height: 25px;
                 width: 25px;
+                min-width: 25px;
                 margin-right: 16px;
                 cursor: pointer;
                 border-radius: 50%;
@@ -361,7 +376,9 @@ body {
             .x-button {
               .flex-center();
               width: 15px;
+              min-width: 15px;
               height: 15px;
+              min-height: 15px;
               background-color: transparent;
               background-image: url("imgs/icon-cross.svg");
               background-repeat: no-repeat;
@@ -557,6 +574,9 @@ body {
         .task-list {
           height: 75%;
           .view-tasks {
+            &::-webkit-scrollbar {
+              width: 8px;
+            }
             .task {
               .task-content {
                 .task-text {
