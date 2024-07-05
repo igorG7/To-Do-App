@@ -42,6 +42,7 @@ class Task {
     li.classList.add("task");
     li.classList.add("visible");
     li.classList.add(themeClass);
+    li.setAttribute("draggable", "true");
 
     return li;
   }
@@ -127,12 +128,25 @@ class Task {
   }
 }
 
+function addDraggingEvent() {
+  tasks.forEach((item) => {
+    item.addEventListener("dragstart", () => {
+      item.classList.add("dragging");
+    });
+
+    item.addEventListener("dragend", () => {
+      item.classList.remove("dragging");
+    });
+  });
+}
+
 const createTask = (content) => {
   const newTask = new Task(content);
   newTask.defineStatus("active");
   newTask.storeTasks(content);
   ulViewTasks.appendChild(newTask.liElement);
   tasks = Array.from(ulViewTasks.querySelectorAll("li"));
+  addDraggingEvent();
 };
 
 input_create.addEventListener("keypress", (e) => {
@@ -208,10 +222,6 @@ const removeAllCompletedTasks = () => {
 
 clearButton.addEventListener("click", removeAllCompletedTasks);
 
-let loadedTasks = JSON.parse(localStorage.getItem("taskElement"));
-storedTasks = loadedTasks || [];
-console.log(storedTasks);
-
 storedTasks.forEach((item) => {
   let retrievedTask = new Task(item.text);
   retrievedTask.defineStatus(item.status);
@@ -219,3 +229,38 @@ storedTasks.forEach((item) => {
 });
 
 tasks = Array.from(ulViewTasks.querySelectorAll("li"));
+
+addDraggingEvent();
+
+function startSortableList(e) {
+  const draggingItem = ulViewTasks.querySelector(".dragging");
+  const siblings = [...ulViewTasks.querySelectorAll(".task:not(.dragging)")];
+  e.preventDefault();
+
+  let nextSibling = siblings.find((item) => {
+    const rect = item.getBoundingClientRect();
+    return e.clientY <= rect.top + window.scrollY + rect.height / 2;
+  });
+
+  ulViewTasks.insertBefore(draggingItem, nextSibling);
+}
+
+function saveNewOrder() {
+  tasks = Array.from(ulViewTasks.querySelectorAll("li"));
+  storedTasks = [];
+
+  tasks.forEach((item) => {
+    let taskText = item.querySelector("p").textContent;
+    let statusTask = item.classList.contains("active") ? "active" : "completed";
+
+    storedTasks.push({
+      text: taskText,
+      status: statusTask,
+    });
+  });
+
+  localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+}
+
+ulViewTasks.addEventListener("dragover", startSortableList);
+ulViewTasks.addEventListener("drop", saveNewOrder);
