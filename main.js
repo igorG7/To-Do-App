@@ -3,6 +3,7 @@ import { themeChange } from "./util/theme.js";
 const theme_button = document.querySelector("#theme-button");
 const input_create = document.querySelector("#input-create");
 const ulViewTasks = document.querySelector(".view-tasks");
+const itemsLeft = document.querySelector("#items-left");
 let tasks = Array.from(ulViewTasks.querySelectorAll("li"));
 
 const bodyTheme = document.querySelector("body");
@@ -11,6 +12,11 @@ theme_button.addEventListener("click", themeChange);
 
 let storedTasks = JSON.parse(localStorage.getItem("taskElement")) || [];
 
+function updateItemsLeft() {
+  itemsLeft.innerHTML = `${storedTasks.length} items left`;
+}
+
+updateItemsLeft();
 class Task {
   constructor(content) {
     const activeTheme = this.theme();
@@ -95,6 +101,7 @@ class Task {
       );
       storedTasks = foundTask;
       localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+      updateItemsLeft();
     });
   }
 
@@ -147,6 +154,7 @@ const createTask = (content) => {
   ulViewTasks.appendChild(newTask.liElement);
   tasks = Array.from(ulViewTasks.querySelectorAll("li"));
   addDraggingEvent();
+  updateItemsLeft();
 };
 
 input_create.addEventListener("keypress", (e) => {
@@ -215,9 +223,9 @@ const removeAllCompletedTasks = () => {
   let foundAllCompletedTasks = storedTasks.filter(
     (item) => item.status != "completed"
   );
-  console.log(foundAllCompletedTasks);
   storedTasks = foundAllCompletedTasks;
   localStorage.setItem("taskElement", JSON.stringify(storedTasks));
+  updateItemsLeft();
 };
 
 clearButton.addEventListener("click", removeAllCompletedTasks);
