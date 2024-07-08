@@ -148,6 +148,7 @@ function addDraggingEvent() {
 }
 
 const createTask = (content) => {
+  if (content === "") return;
   const newTask = new Task(content);
   newTask.defineStatus("active");
   newTask.storeTasks(content);
