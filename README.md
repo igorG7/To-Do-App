@@ -16,34 +16,34 @@ A aplicação em questão trata-se de uma Todo List (Lista de Tarefas).  Para su
 
 https://igorg7.github.io/To-Do-App/
 
-### Funcionamento da Aplicação
+## Processo de criação
 
-O funcionamento do projeto gira em torno de uma classe construtora denominada "Task", responsável por criar os objetos HTML principais da aplicação através da entrada de dados, também carrega funções de controle que são utilizadas durante o fluxo do código. 
+Para o funcionamento da aplicação, uma classe construtora foi utilizada para realizar o objetivo fundamental do projeto e gerar seus principais elementos. Denominada `Task`, esta classe além de criar os objetos HTML que irão se tornar as tarefas, também carrega funções que são utilizadas para controlar o estado das mesmas. Esses estados alternam entre "Ativo" e  "Concluído", e são controlados por uma função que monitora o clique do usuário sobre cada tarefa. Além de alterar o estado de uma tarefa, também é possível realizar a exclusão através de um botão representado por um "X", após o clique, uma função própria para a deleção é chamada.
 
-![class task](https://github.com/user-attachments/assets/327d6876-f3f8-4c57-991f-9b9783b2c763)
-(Construtor da classe)
+![class task](https://github.com/user-attachments/assets/3041ce8b-290e-4c05-bac1-ac0f2d4378a3)
+(Classe Task, responsável pela criação e controle das tarefas).
 
-![class task create func](https://github.com/user-attachments/assets/b921bae4-430a-4c1d-a165-b8bb38db3c46)
-(Funções que criam os elementos HTML)
+![class task create func](https://github.com/user-attachments/assets/7160d3b9-de41-43aa-8d40-841316a43b74)
+(Funções responsáveis por criar os elementos HTML que irão compor a tarefa).
 
-Após receber os dados do tipo string através da entrada do usuário, uma função para a criação do objeto HTML é chamada, dentro dessa função a classe "Task" é iniciada e atribuída a uma variável que armazena o objeto criado e o adiciona ao seu elemento pai, uma lista não ordenada que recebe os objetos criados como seus itens filhos. 
+![class task control func](https://github.com/user-attachments/assets/bb479223-fdd2-4873-8e4f-f798b187fc9e)
+(Funções responsáveis por controlar o estado das tarefas).
 
-O elemento pai ( elemento UL ) recebe os elementos filhos ( elemento LI ) que são atualizados durante o fluxo da aplicação, que podem ser inseridos ou removidos pelo usuário através da área de entrada dos dados ou o botão de remoção das tarefas. 
+Para a criação das tarefas, é necessário que o usuário entre com os dados no campo de input disponível. Após o envio dos dados, uma função para a criação da tarefa é chamada, nesta função, o objeto HTML gerado pela classe `Task` é atribuído a uma variável que armazena o objeto criado. Após a criação, o objeto recebe os dados do tipo `string` fornecidos pelo usuário e seu status, e então é acrescentado ao seu elemento pai, uma lista não ordenada.  
 
-![elements](https://github.com/user-attachments/assets/5d2e3cec-6df4-40c0-ae2c-6c3fa34c3a70)
-(Elemento pai UL, Elemento filho LI)
+![create task func](https://github.com/user-attachments/assets/e35564f8-fe7d-4220-910e-37cd82280ba5)
+(Função responsável pela criadção de tarefas e evento DOM inicializador).
 
-![create task func](https://github.com/user-attachments/assets/532f001b-aef8-40fb-95f5-4048f66a3c6d)
-(Função que cria os objetos e evento DOM inicializando a função)
+Em paralelo a classe `Task`, um `Array` denominado `storedTasks` trabalha com uma coleção de objetos, que são alimentados pelas informações de cada tarefa criada. Para cada tarefa existente, um objeto contendo o texto e o status da mesma é armazenado dentro do Array. Conforme o usuário interage com as tarefas já criadas, o `Array` `storedTasks` é atualizado. Essas atualizações consistem na alteração do status de uma determinada tarefa, que variam entre "Ativo" e "Concluída" e sua remoção definitiva, assim como os objetos HTML. As funções responsáveis pelas alterações dentro do Array estão contidas dentro da classe `Task`, e são acionadas junto as funções de controle de estado dos Objetos HTML.
 
-Com a criação das tarefas por parte do usuário, elas são inseridas em uma estrutura de dados do tipo array, que funciona em paralelo com o controle de estado das tarefas criadas e existentes na aplicação.
+![array de objetos](https://github.com/user-attachments/assets/f277e13f-558c-40b4-9a6f-7343b4f0b1ed)
+(Variavel que mantém os objetos).
 
-![array de objetos](https://github.com/user-attachments/assets/619b9f54-e17c-461e-aeab-64422ab3ada7)
+![func localstorage](https://github.com/user-attachments/assets/3d1df0e8-7001-4639-81b1-bb89d2c4e277)
+(Funções que inserem e alteram as informações dentro do Array de objetos).
 
-Esse array recebe uma coleção de objetos que guardam as informações de cada tarefa, como por exemplo, o texto da tarefa e o seu status. Para a persistência desses dados, o array é armazenado na memoria local do navegador e todas as informações são mantidas mesmo após o usuário encerrar sua sessão. 
+Para a persistência das informações geradas pela interação do usuário, a coleção de dados `storedTasks` é armazenada na memoria local do navegador, assim, sempre que o usuário encerrar sua sessão e retornar a aplicação, suas tarefas irão ser recuperadas e exibidas novamente.
 
-![image](https://github.com/user-attachments/assets/2afc031f-14ca-4e3c-aa0e-74c9e8e28374)
+![image](https://github.com/user-attachments/assets/b4626549-c098-4602-9e11-155e5a56451f)
+(Memoria local do navegador).
 
-Com as tarefas sendo exibidas em tela, é possível controlar seus estados interagindo com cliques em seus botões. Existem os seguintes botões em cada tarefa: botão de verificação que alterna o estado da tarefa entre "Ativo" e "Completa", e o botão de exclusão representado por um "X". Ao clicar em algum desses botões, as funções de controle da classe "Task" são chamadas e executadas. 
-
-![class task control func](https://github.com/user-attachments/assets/05ed8e99-2658-4e2d-981a-cac0e36df2ab)
