@@ -32,7 +32,7 @@ Para o funcionamento da aplicação, uma classe construtora foi utilizada para r
 Para a criação das tarefas, é necessário que o usuário entre com os dados no campo de input disponível. Após o envio dos dados, uma função para a criação da tarefa é chamada, nesta função, o objeto HTML gerado pela classe `Task` é atribuído a uma variável que armazena o objeto criado. Após a criação, o objeto recebe os dados do tipo `string` fornecidos pelo usuário e seu status, e então é acrescentado ao seu elemento pai, uma lista não ordenada.  
 
 ![create task func](https://github.com/user-attachments/assets/e35564f8-fe7d-4220-910e-37cd82280ba5)
-(Função responsável pela criadção de tarefas e evento DOM inicializador).
+(Função responsável pela criação de tarefas e evento DOM inicializador).
 
 Em paralelo a classe `Task`, um `Array` denominado `storedTasks` trabalha com uma coleção de objetos, que são alimentados pelas informações de cada tarefa criada. Para cada tarefa existente, um objeto contendo o texto e o status da mesma é armazenado dentro do Array. Conforme o usuário interage com as tarefas já criadas, o `Array` `storedTasks` é atualizado. Essas atualizações consistem na alteração do status de uma determinada tarefa, que variam entre "Ativo" e "Concluída" e sua remoção definitiva, assim como os objetos HTML. As funções responsáveis pelas alterações dentro do Array estão contidas dentro da classe `Task`, e são acionadas junto as funções de controle de estado dos Objetos HTML.
 
@@ -46,4 +46,12 @@ Para a persistência das informações geradas pela interação do usuário, a c
 
 ![image](https://github.com/user-attachments/assets/b4626549-c098-4602-9e11-155e5a56451f)
 (Memoria local do navegador).
+
+Para a visualização das tarefas, existem três opções: "All" ("Todas)", "Active" ("Ativas") e "Completed" ("Completas"). Ao selecionar alguma das opções, uma função que realiza um mapeamento com as tarefas existentes é chamada. Para as opções "Active" ("Ativas") e "Completed" ("Completas"), apenas as tarefas que atenderem as condições serão exibidas, já na opção "All" ("Todas"), serão exibidas todas as tarefas existentes na lista.
+
+![view option](https://github.com/user-attachments/assets/eb63eb61-de6c-423e-8db4-ac79a5202a47)
+(Evento DOM que define a opção ativa).
+
+![render funcs](https://github.com/user-attachments/assets/d25f06ab-9506-4507-95f1-6823591a6708)
+(Funções para renderização da opção selecionada).
 
