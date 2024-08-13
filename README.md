@@ -65,3 +65,17 @@ Caso o usuário deseje reorganizar sua lista, a função de Drag and Drop (Arras
 
 ![reeoder func](https://github.com/user-attachments/assets/dd53c06c-d8ca-485a-b878-0c2c273baa83)
 (Função resposável pelo cálculo de posição da tarefa realocada).
+
+## O que foi aprendido 
+
+### Utilização de classes no Javascript 
+
+Em partes da construção de código, optei por utilizar as classes e aprimorar meus conhecimentos sobre esse conceito. Com base em estudos e aplicações práticas no código, pude lapidar esse novo aprendizado e entender suas possibilidades de aplicação.
+
+### Drag and Drop
+
+Arrastar e soltar são ações presentes em várias aplicações pela web, e neste projeto pude aprender a aplicar essas funcionalidades, entregando uma interação mais dinâmica ao usuário e lhe permitindo decidir como deseja posicionar os elementos na aplicação.  
+
+## Créditos 
+
+Essa aplicação é um desafio da plataforma Front End Mentor, onde estão disponíveis diversas soluções para seus usuários se desafiarem a realizar. Nesses desafios os usuários contam apenas com uma visualização do resultado final de onde devem chegar, o caminho até o objetivo é totalmente por conta própria e com base em seus conhecimentos. 
