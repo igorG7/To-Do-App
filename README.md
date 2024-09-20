@@ -29,7 +29,7 @@ Para o funcionamento da aplicação, uma classe construtora foi utilizada para r
 ![class task control func](https://github.com/user-attachments/assets/bb479223-fdd2-4873-8e4f-f798b187fc9e)
 (Funções responsáveis por controlar o estado das tarefas).
 
-Para a criação das tarefas, é necessário que o usuário entre com os dados no campo de input disponível. Após o envio dos dados, uma função para a criação da tarefa é chamada, nesta função, o objeto HTML gerado pela classe `Task` é atribuído a uma variável que armazena o objeto criado. Após a criação, o objeto recebe os dados do tipo `string` fornecidos pelo usuário e seu status, então é acrescentado ao seu elemento pai, que é uma uma lista.  
+Para a criação das tarefas, é necessário que o usuário entre com os dados no campo de input disponível. Após o envio dos dados, uma função para a criação da tarefa é chamada, nesta função, o objeto HTML gerado pela classe `Task` é atribuído a uma variável que armazena o objeto criado. Após a criação, o objeto recebe os dados do tipo `string` fornecidos pelo usuário e seu status, então é acrescentado ao seu elemento pai, que é uma lista.  
 
 ![create task func](https://github.com/user-attachments/assets/e35564f8-fe7d-4220-910e-37cd82280ba5)
 (Função responsável pela criação de tarefas e evento DOM inicializador).
